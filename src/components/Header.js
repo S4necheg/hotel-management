@@ -1,8 +1,7 @@
-import React from 'react'
+import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Header() {
-
+function Header({setModalActive}) {
     return (
         <header className="d-flex justify-between align-center p-40">
         <Link to="/">
@@ -14,12 +13,10 @@ function Header() {
             </div>
             </div>
         </Link>
-        <Link to="/settings">
-          <button className="d-flex justify-between align-center">
+          <button className="d-flex justify-between align-center" onClick={() => setModalActive(true)}>
             <span className="m-10">Test</span>
             <img width={35} height={35} src="img/settings.svg" alt="Settings" />
           </button>
-        </Link>
       </header>
     );
 }

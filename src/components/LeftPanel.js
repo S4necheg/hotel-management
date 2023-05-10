@@ -8,45 +8,45 @@ function LeftPanel() {
           <h4>Основное</h4>
             <ul>
               <div className="bottom">
+              <Link to="/">
                 <li className="cu-p p-15">
-                  <Link to="/">
                     <img width={20} height={20} src="img/home.svg" alt="Home" />
                     <span>Главная</span>
-                  </Link>
                 </li>
+              </Link>
               </div>
               <div className="bottom">
                 <h4>Отель</h4>
+              <Link to="/registration">
                 <li className="cu-p p-15">
-                  <Link to="/registration">
                     <img width={20} height={20} src="img/registration.svg" alt="Registration" />
                     <span>Регистрация и бронирование</span>
-                  </Link>
                 </li>
+              </Link>
+              <Link to="/guests">
                 <li className="cu-p p-15">
-                  <Link to="/guests">
                     <img width={20} height={20} src="img/guests.svg" alt="Guests" />
                     <span>Гости</span>
-                  </Link>
                 </li>
+              </Link>
+              <Link to="/staff">
                 <li className="cu-p p-15">
-                  <Link to="/staff">
                     <img width={20} height={20} src="img/staff.svg" alt="Staff" />
                     <span>Сотрудники</span>
-                  </Link>
                 </li>
+              </Link>
+              <Link to="/schedule">
                 <li className="cu-p p-15">
-                  <Link to="/Work-schedule">
                     <img width={20} height={20} src="img/work-schedule.svg" alt="Work-schedule" />
                     <span>График работы</span>
-                  </Link>
                 </li>
+              </Link>
+              <Link to="/services">
                 <li className="cu-p p-15">
-                  <Link to="/services">
                     <img width={20} height={20} src="img/services.svg" alt="Services" />
                     <span>Услуги</span>
-                  </Link>
                 </li>
+              </Link>
               </div>
             </ul>
         </div>
