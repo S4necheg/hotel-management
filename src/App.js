@@ -6,9 +6,9 @@ import LeftPanel from './components/LeftPanel';
 import Modal from './modals/Modal'
 
 import Login from './pages/Login';
-import Home from './pages/Home';
-import Registration from './pages/Registration';
-import Guests from './pages/Guests';
+import Home from './pages/Home/Home';
+import Registration from './pages/Registration/Registration';
+import Guests from './pages/Guests/Guests';
 import Staff from './pages/Staff';
 import Schedule from './pages/Schedule';
 import Services from './pages/Services';
@@ -112,7 +112,7 @@ function App() {
                     <span>Выход</span>
                 </li>
               </Link>
-            </ul>
+          </ul>
         </Modal>
         
       {/* </div> */}

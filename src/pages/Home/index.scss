@@ -1,0 +1,126 @@
+body {
+    margin: 0;
+    font-family: 'Inter', system-ui;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #ffffff;
+  }
+  
+  * {
+    font-family:'Inter', system-ui;
+  }
+
+.content {
+    .home {
+      margin: 0px;
+      background: #F4F8FB;
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04);
+      border-radius: 20px;
+      margin-left: 80px;
+      width: 1440px;
+      height: 740px;
+    }
+  
+    .homeHeader {
+      background: #64b5f6;
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04);
+      border-radius: 10px;
+      margin: 20px;
+      width: 1400px;
+      height: 120px;
+
+      h1 {
+        color: #ffffff;
+        margin: 0px;
+      }
+
+      p {
+        color: #F4F8FB;
+        margin: 0px;
+      }
+
+      .apexcharts-menu-icon {
+        visibility: collapse;
+      }
+
+      
+      .apexcharts-tooltip {
+        background: #9ab0c7;
+        color: #64b5f6;
+      }
+      
+      span {
+        cursor: pointer;
+        color: #ffffff;
+        margin-right: 30px;
+        padding: 5px;
+        border-radius: 5px;
+        font-size: 14px;
+      }
+
+      span:hover {
+        background: #5294ca;
+      }
+
+      .nav {
+        background: #5294ca;
+      }
+    }
+
+    .homeContent {
+
+        .homeGraph {
+            background: #ffffff;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04);
+            border-radius: 10px;
+            margin-left: 20px;
+            width: 900px;
+            height: 560px;
+            overflow-y: auto;
+
+            h3 {
+                margin-top: 20px;
+                margin-bottom: 20px;
+                margin-left: 10px;
+            }
+          }
+
+        .css-1ps6pg7-MuiPaper-root{
+          border-radius: 10px;
+          box-shadow: none;
+        }
+
+        .css-1675apn-MuiTableCell-root .Cell-highlightedText {
+          color: #64b5f6;
+          font-family: 'Inter';
+        }
+
+        .homeInfo {
+            background: #ffffff;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04);
+            border-radius: 10px;
+            margin-right: 20px;
+            width: 480px;
+            height: 560px;
+            
+            h3 {
+                margin-top: 20px;
+                margin-bottom: 20px;
+                margin-left: 10px;
+            }
+
+            .bottom {
+                border-bottom: 1px solid #eaeaea;
+                margin-left: 30px;
+                margin-right: 30px;
+                width: auto;
+            
+            p {
+                margin: 0px;
+                margin-top: 8px;
+                margin-bottom: 8px;
+            }
+            }
+        }
+    }
+  }

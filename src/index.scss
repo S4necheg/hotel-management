@@ -61,6 +61,9 @@ header {
     transition: 0.3s;
   }
   
+  .nav_item {
+    background-color:#F4F8FB;
+  }
   .bottom {
     border-bottom: 1px solid #eaeaea;
     margin: 0;
@@ -75,7 +78,7 @@ header {
     border-radius: 20px;
     margin-left: 80px;
     width: 1440px;
-    height: 700px;
+    height: 740px;
   }
 
   .inWrapper {
@@ -84,7 +87,14 @@ header {
     border-radius: 20px;
     margin: 20px;
     width: 1400px;
-    height: 660px;
+    height: 700px;
+  }
+
+  .home {
+    background: #ffffff;
+    margin: 20px;
+    width: 1400px;
+    height: 150px;
   }
 }
 
@@ -131,11 +141,12 @@ header {
     width: 100%;
     
     &:hover {
-      border: 1px solid black;
+      border-color: black;
     }
 
     &:focus{
-      border: 2px solid transparent;
+      border: 1px solid;
+      outline: 1px solid rgb(25, 118, 210);
       border-color: rgb(25, 118, 210);
     }
   }
