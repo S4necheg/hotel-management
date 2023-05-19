@@ -9,7 +9,7 @@ function LeftPanel() {
           <h4>Основное</h4>
             <ul>
               <div className="bottom">
-              <Link to="/">
+              <Link to="/hotel-management">
                 <li className={active === 'main' ? "nav_item cu-p p-15" : "cu-p p-15"} onClick={() => setActive('main')}>
                     <img width={20} height={20} src="img/home.svg" alt="Home" />
                     <span>Главная</span>

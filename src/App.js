@@ -5,13 +5,13 @@ import Header from './components/Header';
 import LeftPanel from './components/LeftPanel';
 import Modal from './modals/Modal'
 
-import Login from './pages/Login';
+import Login from './pages/Login/Login';
 import Home from './pages/Home/Home';
 import Registration from './pages/Registration/Registration';
 import Guests from './pages/Guests/Guests';
-import Staff from './pages/Staff';
-import Schedule from './pages/Schedule';
-import Services from './pages/Services';
+import Staff from './pages/Staff/Staff';
+import Schedule from './pages/Schedule/Schedule';
+import Services from './pages/Services/Services';
 
 function App() {
   const [modalActive, setModalActive] = useState(false);
@@ -31,10 +31,10 @@ function App() {
           </>
           } />
           
-          <Route path="/" exact element={
+          <Route path="hotel-management" exact element={
           <>
           <Header setModalActive={setModalActive} />
-          <div className="content p-50 d-if">
+          <div className="content p-40 d-if">
             <LeftPanel />
             <Home />
           </div>
@@ -44,7 +44,7 @@ function App() {
           <Route path="/registration" element={
           <>
           <Header setModalActive={setModalActive} />
-          <div className="content p-50 d-if">
+          <div className="content p-40 d-if">
             <LeftPanel />
             <Registration />
           </div>
@@ -54,7 +54,7 @@ function App() {
           <Route path="/guests" element={
           <>
           <Header setModalActive={setModalActive} />
-          <div className="content p-50 d-if">
+          <div className="content p-40 d-if">
             <LeftPanel />
             <Guests />
           </div>
@@ -64,7 +64,7 @@ function App() {
           <Route path="/staff" element={
           <>
           <Header setModalActive={setModalActive} />
-          <div className="content p-50 d-if">
+          <div className="content p-40 d-if">
             <LeftPanel />
             <Staff />
           </div>
@@ -74,7 +74,7 @@ function App() {
           <Route path="/schedule" element={
           <>
           <Header setModalActive={setModalActive} />
-          <div className="content p-50 d-if">
+          <div className="content p-40 d-if">
             <LeftPanel />
             <Schedule />
           </div>
@@ -84,7 +84,7 @@ function App() {
           <Route path="/services" element={
           <>
           <Header setModalActive={setModalActive} />
-          <div className="content p-50 d-if">
+          <div className="content p-40 d-if">
             <LeftPanel />
             <Services />
           </div>

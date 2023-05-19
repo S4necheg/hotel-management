@@ -7,7 +7,7 @@ function Registration() {
     return (
         <div className="registration">
             <div className='inRegistration'>
-                <ScheduleReg className="schedu"/>
+                <ScheduleReg />
             </div>
         </div>
     )

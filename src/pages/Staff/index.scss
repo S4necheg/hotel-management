@@ -4,6 +4,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: #ffffff;
+    overflow: hidden;
   }
   
   * {
@@ -11,7 +12,7 @@ body {
   }
 
   .content {
-    .guests {
+    .staff {
       margin: 0px;
       background: #F4F8FB;
       box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04);
@@ -21,27 +22,24 @@ body {
       height: 740px;
     }
 
-    .guestsContent {
+    .staffContent {
         background: #ffffff;
         box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04);
         border-radius: 10px;
         margin: 20px;
         width: 1400px;
         height: 700px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
 
-        .guestsHeader {
+        .staffHeader {
           border-bottom: 1px solid #eaeaea;
           width: 1400px;
           height: 70px;
           padding: 20px;
-  
+
           h3 {
             margin: 0px;
           }
-  
+
           span {
             border-radius: 5px;
             background: #66CDAA;
@@ -53,45 +51,50 @@ body {
             color:#ffffff;
             cursor: pointer;
           }
-  
+
           span:hover {
             background-color: #72e6bf;
           }
         }
 
-        .Container {
-          margin: 0px;
-          padding-left: 20px;
-          padding-right: 20px;
-          overflow: hidden;
-
-          .tableHeader {
-            background: #F4F8FB;
+        .card {
+          margin: 20px;
+          padding: 30px;
+          background: #ffffff;
+          border: 1px solid #f3f3f3;
+          border-radius: 20px;
+          width: 240px;
+          height: 275px;
+          display: flex;
+          justify-content: center;
+          flex-wrap: wrap;
+          transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
+          cursor: pointer;
+          
+          &:hover {
+            box-shadow: 0px 20px 35px rgba(0, 0, 0, 0.06);
+            transform: translateY(-5px);
           }
 
-          .buttonDelete {
-            display: flex;
+          img {
+            margin: 0px;
           }
-          .css-rqglhn-MuiTable-root {
-            border-collapse: separate 
+
+          h5 {
+            margin: 5px;
+            margin-bottom: 0px;
+            text-align: center;
+            font-weight: 400;
+            font-size: 16px;
+          }
+
+          p {
+            margin: 0px;
+            opacity: 0.5;
+            font-size: 14px;
           }
         }
       }
-
-      .Alert {
-        position: absolute;
-        bottom: 20px;
-        right: 20px;
-        animation: 0.5s showAlert;
-      }
   }
 
-  @keyframes showAlert {
-    from {
-      transform: translateX(100px)
-    }
-
-    to {
-      transform: translateX(0px);
-    }
-  }
+  

@@ -34,15 +34,15 @@ function Home() {
                         <h3>Сегодня дежурят:</h3>
                     </div>
                     <div className='bottom'>
-                        <span>Ольга Белореченко</span>
+                        <span>Александр Муханин</span>
                         <p className="opacity-5">Администратор</p>
                     </div>
                     <div className='bottom'>
-                        <span>Ольга Белореченко</span>
+                        <span>Александр Муханин</span>
                         <p className="opacity-5">Горничная</p>
                     </div>
                     <div className='bottom'>
-                        <span>Ольга Белореченко</span>
+                        <span>Александр Муханин</span>
                         <p className="opacity-5">Повар</p>
                     </div>
                 </div>
