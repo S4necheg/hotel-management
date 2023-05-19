@@ -33,7 +33,7 @@ function Login() {
                             <FormControlLabel control={<Checkbox defaultChecked />} label="Запомнить меня" className='clear' />
                             <span className="color-text cu-p">Забыли пароль?</span>
                         </div>
-                        <Link to="/">
+                        <Link to="/hotel-management">
                             <button className="button-auto"><span className="opacity-8">Войти</span></button>
                         </Link>
                     </div>

@@ -5,6 +5,8 @@ import { TablePagination, TableContainer, IconButton, Table, TableBody, TableCel
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { Alert, AlertTitle } from '@mui/material';
 
+import TextField from '@mui/material/TextField';
+
 function Guests() {
     const guests = [
         {id: '1', firstName: 'Артем', lastName: 'Артемов', numberRoom: '101', dateIn: '18.05.2023', dateOut: '24.05.2023'},
@@ -41,14 +43,53 @@ function Guests() {
       };
 
     const [goAdddedPage, setGoAddedPage] = useState(false)
+    const [addGuest, setAddGuest] = useState(false)
 
     return (
         <div className="guests">
             {goAdddedPage ? (
-                <div className='guestsContent'>
+                <div className='guestsAddContent'>
                     <div className="guestsHeader d-flex justify-between align-center" >
                         <h3>Добавление гостя</h3>
-                        <span onClick={() => {setGoAddedPage(false)}}>Добавить</span>
+                        <span onClick={() => {setGoAddedPage(false); setAddGuest(true)}}>Добавить</span>
+                    </div>
+                    <div className='guestsAddField'>
+                        <TextField
+                            className='TextField'
+                            required
+                            id="outlined-required"
+                            label="Имя"
+                            variant="outlined"
+                        />
+                        <TextField
+                            className='TextField'
+                            required
+                            id="outlined-required"
+                            label="Фамилия"
+                            variant="outlined"
+                        />
+                        <TextField
+                            className='TextField'
+                            required
+                            id="outlined-required"
+                            label="Номер"
+                            variant="outlined"
+                            type="number"
+                        />
+                        <TextField
+                            className='TextField'
+                            required
+                            id="outlined-required"
+                            label="Дата заезда"
+                            variant="outlined"
+                        />
+                        <TextField
+                            className='TextField'
+                            required
+                            id="outlined-required"
+                            label="Дата отъезда"
+                            variant="outlined"
+                        />
                     </div>
                 </div>
             )
@@ -115,6 +156,7 @@ function Guests() {
             </div>
             )}
             {alert ? <Alert className='Alert' onClose={() => setAlert(false)} severity="success"><AlertTitle>Успешно</AlertTitle>Запись удалена!</Alert> : null}
+            {addGuest ? <Alert className='Alert' onClose={() => setAddGuest(false)} severity="success"><AlertTitle>Успешно</AlertTitle>Запись добавлена!</Alert> : null}
         </div>
     ) 
 }

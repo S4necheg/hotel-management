@@ -21,6 +21,55 @@ body {
       height: 740px;
     }
 
+    .guestsAddContent {
+        background: #ffffff;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04);
+        border-radius: 10px;
+        margin: 20px;
+        width: 1400px;
+        height: 700px;
+
+        .guestsHeader {
+          border-bottom: 1px solid #eaeaea;
+          width: 1400px;
+          height: 70px;
+          padding: 20px;
+  
+          h3 {
+            margin: 0px;
+          }
+  
+          span {
+            border-radius: 5px;
+            background: #66CDAA;
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            font-size: 14px;
+            color:#ffffff;
+            cursor: pointer;
+          }
+  
+          span:hover {
+            background-color: #72e6bf;
+          }
+        }
+
+        .guestsAddField {
+          padding: 20px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+
+          .TextField{
+            margin-bottom: 20px;
+            background-color:#F4F8FB;
+          }
+        }
+        
+    }
+
     .guestsContent {
         background: #ffffff;
         box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04);
@@ -73,6 +122,10 @@ body {
             display: flex;
           }
           .css-rqglhn-MuiTable-root {
+            border-collapse: separate 
+          }
+
+          .css-1owb465 {
             border-collapse: separate 
           }
         }
