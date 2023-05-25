@@ -24,7 +24,7 @@ export const classes = {
   formControlLabel: `${PREFIX}-formControlLabel`,
 };
 
-let currentDate = '2018-06-27';
+let currentDate = '2023-05-27';
 
 export default () => {
   const [data, setData] = React.useState(appointments);
@@ -68,12 +68,60 @@ export default () => {
     />
   )), [allowAdding]);
 
+  //Настройка AppointmentForm
   const CommandButton = React.useCallback(({ id, ...restProps }) => {
     if (id === 'deleteButton') {
       return <AppointmentForm.CommandButton id={id} {...restProps} disabled={!allowDeleting} />;
     }
     return <AppointmentForm.CommandButton id={id} {...restProps} />;
   }, [allowDeleting]);
+
+  const BasicLayout = ({ onFieldChange, appointmentData, ...restProps }) => {
+    //return <div />;
+    return (
+      <AppointmentForm.BasicLayout
+      appointmentData={appointmentData}
+      onFieldChange={onFieldChange}
+      {...restProps}   
+    >
+    </AppointmentForm.BasicLayout>
+    )
+  };
+
+  const BoolEditor = (props) => {
+    return null;
+  };
+
+  const LabelComponent = (props) => {
+    if (props.text === 'Details') {
+      return <AppointmentForm.Label
+      { ...props} 
+      text="Создание смены"
+      />  
+    } else if (props.text === 'More Information') {
+      return null
+    } else if (props.text === '-') {
+      return <AppointmentForm.Label
+      { ...props}
+      />  
+    }
+  };
+
+  const InputComponent = (props) => {
+    if (props.type === 'titleTextEditor') {
+      return <AppointmentForm.TextEditor
+      { ...props}
+      type='textEditor'
+      placeholder='ФИО'
+      />
+    }
+
+    return <AppointmentForm.TextEditor
+    { ...props}
+    type='textEditor'
+    placeholder='Должность'
+    />
+  };
 
   const allowDrag = React.useCallback(
     () => allowDragging && allowUpdating,
@@ -135,6 +183,11 @@ export default () => {
             showDeleteButton={allowDeleting}
           />
           <AppointmentForm
+            basicLayoutComponent={BasicLayout}
+            textEditorComponent={InputComponent}
+            booleanEditorComponent={BoolEditor}
+            labelComponent={LabelComponent}
+
             commandButtonComponent={CommandButton}
             readOnly={isAppointmentBeingCreated ? false : !allowUpdating}
           />

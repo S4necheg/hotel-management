@@ -1,14 +1,15 @@
 export const appointments = [
     {
-      title: 'Сделать главную',
-      startDate: new Date(2023, 5, 16, 9, 0),
-      endDate: new Date(2023, 5, 16, 11, 30),
+      title: 'Муханин Александр Алексеевич',
+      startDate: new Date(2023, 4, 20, 9, 0),
+      endDate: new Date(2023, 4, 20, 11, 30),
       id: 0,
-      location: 'Room 1',
+      location: 101,
+      price: 1000,
     }, {
       title: 'Book Flights to San Fran for Sales Trip',
-      startDate: new Date(2023, 5, 16, 19, 0),
-      endDate: new Date(2023, 5, 16, 21, 30),
+      startDate: new Date(2023, 4, 16, 19, 0),
+      endDate: new Date(2023, 4, 16, 21, 30),
       id: 1,
       location: 'Room 1',
     }, {
@@ -79,8 +80,8 @@ export const appointments = [
       location: 'Room 2',
     }, {
       title: 'Upgrade Server Hardware',
-      startDate: new Date(2023, 5, 16, 14, 30),
-      endDate: new Date(2023, 5, 16, 16, 0),
+      startDate: new Date(2023, 4, 16, 14, 30),
+      endDate: new Date(2023, 4, 16, 16, 0),
       id: 13,
       location: 'Room 3',
     }, {
@@ -187,14 +188,14 @@ export const appointments = [
       location: 'Room 1',
     }, {
       title: 'Upgrade Server Hardware',
-      startDate: new Date(2023, 5, 16, 13, 30),
-      endDate: new Date(2023, 5, 16, 16, 25),
+      startDate: new Date(2023, 4, 16, 13, 30),
+      endDate: new Date(2023, 4, 16, 16, 25),
       id: 31,
       location: 'Room 2',
     }, {
       title: 'Submit New Website Design',
-      startDate: new Date(2018, 5, 16, 12, 30),
-      endDate: new Date(2018, 5, 16, 18, 0),
+      startDate: new Date(2023, 4, 16, 12, 30),
+      endDate: new Date(2023, 4, 16, 18, 0),
       id: 32,
       location: 'Room 2',
     }, {

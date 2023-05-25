@@ -9,7 +9,7 @@ function LeftPanel() {
           <h4>Основное</h4>
             <ul>
               <div className="bottom">
-              <Link to="/hotel-management">
+              <Link to="/hotel-management/">
                 <li className={active === 'main' ? "nav_item cu-p p-15" : "cu-p p-15"} onClick={() => setActive('main')}>
                     <img width={20} height={20} src="img/home.svg" alt="Home" />
                     <span>Главная</span>
@@ -18,31 +18,31 @@ function LeftPanel() {
               </div>
               <div className="bottom">
                 <h4>Отель</h4>
-              <Link to="/registration">
+              <Link to="/hotel-management/registration">
                 <li className={active === 'reg' ? "nav_item cu-p p-15" : "cu-p p-15"} onClick={() => setActive('reg')}>
                     <img width={20} height={20} src="img/registration.svg" alt="Registration" />
                     <span>Регистрация и бронирование</span>
                 </li>
               </Link>
-              <Link to="/guests">
+              <Link to="/hotel-management/guests">
                 <li className={active === 'guests' ? "nav_item cu-p p-15" : "cu-p p-15"} onClick={() => setActive('guests')}>
                     <img width={20} height={20} src="img/guests.svg" alt="Guests" />
                     <span>Гости</span>
                 </li>
               </Link>
-              <Link to="/staff">
+              <Link to="/hotel-management/staff">
                 <li className={active === 'staff' ? "nav_item cu-p p-15" : "cu-p p-15"} onClick={() => setActive('staff')}>
                     <img width={20} height={20} src="img/staff.svg" alt="Staff" />
                     <span>Сотрудники</span>
                 </li>
               </Link>
-              <Link to="/schedule">
+              <Link to="/hotel-management/schedule">
                 <li className={active === 'sched' ? "nav_item cu-p p-15" : "cu-p p-15"} onClick={() => setActive('sched')}>
                     <img width={20} height={20} src="img/work-schedule.svg" alt="Work-schedule" />
                     <span>График работы</span>
                 </li>
               </Link>
-              <Link to="/services">
+              <Link to="/hotel-management/services">
                 <li className={active === 'serv' ? "nav_item cu-p p-15" : "cu-p p-15"} onClick={() => setActive('serv')}>
                     <img width={20} height={20} src="img/services.svg" alt="Services" />
                     <span>Услуги</span>

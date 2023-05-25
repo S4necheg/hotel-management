@@ -23,7 +23,7 @@ function App() {
         <LeftPanel /> */}
         <Routes>
 
-        <Route path="/login" exact element={
+        <Route path="hotel-management/login" exact element={
           <>
           <div className="login">
             <Login />
@@ -41,7 +41,7 @@ function App() {
           </>
           } />
 
-          <Route path="/registration" element={
+          <Route path="hotel-management/registration" element={
           <>
           <Header setModalActive={setModalActive} />
           <div className="content p-40 d-if">
@@ -51,7 +51,7 @@ function App() {
           </>
           } />
 
-          <Route path="/guests" element={
+          <Route path="hotel-management/guests" element={
           <>
           <Header setModalActive={setModalActive} />
           <div className="content p-40 d-if">
@@ -61,7 +61,7 @@ function App() {
           </>
           } />
 
-          <Route path="/staff" element={
+          <Route path="hotel-management/staff" element={
           <>
           <Header setModalActive={setModalActive} />
           <div className="content p-40 d-if">
@@ -71,7 +71,7 @@ function App() {
           </>
           } />
 
-          <Route path="/schedule" element={
+          <Route path="hotel-management/schedule" element={
           <>
           <Header setModalActive={setModalActive} />
           <div className="content p-40 d-if">
@@ -81,7 +81,7 @@ function App() {
           </>
           } />
 
-          <Route path="/services" element={
+          <Route path="hotel-management/services" element={
           <>
           <Header setModalActive={setModalActive} />
           <div className="content p-40 d-if">
@@ -100,13 +100,13 @@ function App() {
             <p className="opacity-5">Администратор</p>
           </div>
           <ul>
-              <Link to="/settings">
+              <Link to="/hotel-management/settings">
                 <li className="d-flex align-center cu-p pt-15 pb-15" onClick={() => setModalActive(false)}>
                     <img width={30} height={30} className="mr-15" src="img/settings.svg" alt="Settings" />
                     <span>Настройки аккаунта</span>
                 </li>
               </Link>
-              <Link to="/login">
+              <Link to="/hotel-management/login">
                 <li className="d-flex align-center cu-p pt-15 pb-15" onClick={() => setModalActive(false)}>
                     <img width={30} height={30} className="mr-15" src="img/exit.svg" alt="Exit" />
                     <span>Выход</span>
