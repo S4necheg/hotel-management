@@ -3,6 +3,10 @@ import '../../pages/Staff/index.scss'
 
 import ModalStaff from '../../pages/Staff/ModalStaff'
 
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { Alert, AlertTitle } from '@mui/material';
+import {IconButton} from '@mui/material';
+
 function Card({
     id,  
     title, 
@@ -12,9 +16,17 @@ function Card({
     experience,
     number,
     mail,
+    setItems,
+    items,
 }) {
     const [modalActive, setModalActive] = useState(false);
-
+    //Alert на успешное удаление сотрудника
+    const [alert, setAlert] = useState(false)
+    //Удаление записи
+    const removeCard = (id) => {
+        setItems(items.filter((items) => items.id !== id ))
+        setAlert(true)
+    }
     return (
         <>
         <div className='card' onClick={() => {setModalActive(true)}}>
@@ -31,7 +43,10 @@ function Card({
                     <p>{jobTitle}</p>
                 </div>
                 <div className='fullInfoStaff'>
-                    <h3>Информация о сотруднике</h3>
+                    <div className='titleInfo'>
+                        <h3>Информация о сотруднике</h3>
+                        <IconButton className='buttonDelete' onClick={() => removeCard(id)} > <DeleteForeverIcon color='error' /> </IconButton>
+                    </div>
                     <ul>
                         <li>
                             <span>Возраст: </span> <span>{age} лет</span>
@@ -47,8 +62,10 @@ function Card({
                         </li>
                     </ul>
                 </div>
+                {/* <div><IconButton onClick={() => removeCard(id)} > <DeleteForeverIcon color='error' /> </IconButton></div> */}
             </div>
         }/>
+        {alert ? <Alert className='Alert' onClose={() => setAlert(false)} severity="success"><AlertTitle>Успешно</AlertTitle>Запись удалена!</Alert> : null}
         </>
     )
 }

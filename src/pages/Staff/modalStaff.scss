@@ -27,7 +27,7 @@
     transform: scale(0.5);
     transition: 0.4s all;
     width: 35vw;
-    height: 35vh;
+    height: 34vh;
     z-index: 2;
 }
 
@@ -54,13 +54,23 @@
         //border: 1px solid #050000;
         border-radius: 20px;
         padding-left: 40px;
-        padding-right: 40px;
+        //padding-right: 40px;
     }
 
-    h3 {
+    .titleInfo {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         margin-bottom: 40px;
-        font-weight: 600;
-        font-size: 18px;
+        padding-right: 28px;
+
+        h3 {
+            font-weight: 600;
+            font-size: 18px;
+        }
+        .buttonDelete {
+            margin-left: 10px;
+        }
     }
 
     p {
@@ -75,6 +85,7 @@
         display: flex;
         justify-content: space-between;
         border: none;
+        padding-right: 40px;
 
         span {
             font-size: 14px;

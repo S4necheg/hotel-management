@@ -31,6 +31,8 @@ function Staff() {
                 experience = {item.experience}
                 number = {item.number}
                 mail = {item.mail}
+                items = {items}
+                setItems = {setItems}
                 {...item}
             />
         ))
@@ -195,6 +197,7 @@ function Staff() {
                         error={errorNumber}
                         id="outlined-required"
                         label="Номер"
+                        placeholder="Пример ввода: +7 (000)-000-00-00"
                         variant="outlined"
                         value={valueNumber}
                         onChange={handleChangeNumber}
@@ -206,6 +209,7 @@ function Staff() {
                         id="outlined-required"
                         label="e-mail"
                         variant="outlined"
+                        placeholder="Пример ввода: user@mail.ru"
                         value={valueMail}
                         onChange={handleChangeMail}
                     />
@@ -219,20 +223,6 @@ function Staff() {
                     <h3>Список сотрудников</h3>
                     <span onClick={() => {setGoAddedPage(true); setAddStaff(false); cleanField()}}>Добавить</span>
                 </div>
-                {/* <div className='card' onClick={() => setModalActive(true)}>
-                    <img width={200} height={170} src='img/staff-card/staff-card.jpg' alt='staff-card' />
-                    <h5>Муханин Александр Алексеевич</h5>
-                    <p>Администратор</p>
-                </div>
-                <div className='card' ></div>
-                <div className='card' ></div>
-                <div className='card' ></div>
-                <div className='card' ></div>
-                <div className='card' ></div>
-                <div className='card' ></div>
-                <div className='card' ></div>
-                <div className='card' ></div>
-                <div className='card' ></div> */}
                 {renderItems()}
             </div>
             )}
