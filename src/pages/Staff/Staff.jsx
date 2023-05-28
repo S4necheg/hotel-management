@@ -11,12 +11,12 @@ function Staff() {
 
 
     const [items, setItems] = useState([
-        {id: "1", title: "Муханин Александр Алексеевич", jobTitle: "Администратор", imageUrl: 'img/staff-card/staff-card.jpg', age: "36", experience: "4", number: "+7 (989)-123-45-67", mail: "a.muxanin@mail.ru"},
-        {id: "2", title: "Манушаков Родион Каренович", jobTitle: "Горничная", imageUrl: 'img/staff-card/staff-card.jpg', age: "40", experience: "2", number: "+7 (111)-111-11-11", mail: "rodua@mail.ru"},
-        {id: "3", title: "Артемов Артем Сергеевич", jobTitle: "Разгельдяй", imageUrl: 'img/staff-card/staff-card.jpg', age: "30", experience: "3", number: "+7 (000)-000-00-00", mail: "artem@mail.ru"},
-        {id: "4", title: "Динь Куок Ань", jobTitle: "Разгельдяй", imageUrl: 'img/staff-card/staff-card.jpg', age: "30", experience: "8", number: "+7 (222)-222-22-22", mail: "dinh@mail.ru"},
-        {id: "5", title: "Савченко Владислав Андреевич", jobTitle: "Разгельдяй", imageUrl: 'img/staff-card/staff-card.jpg', age: "34", experience: "6", number: "+7 (333)-333-33-33", mail: "vlad@mail.ru"},
-        {id: "6", title: "Семенов Олег Михайлович", jobTitle: "Разгельдяй", imageUrl: 'img/staff-card/staff-card.jpg', age: "27", experience: "4", number: "+7 (444)-444-44-44", mail: "oleg@mail.ru"},
+        {id: "1", title: "Муханин Александр Алексеевич", jobTitle: "Администратор", imageUrl: 'img/staff-card/staff-card4.svg', age: "36", experience: "4", number: "+7 (989)-123-45-67", mail: "a.muxanin@mail.ru"},
+        {id: "2", title: "Манушаков Родион Каренович", jobTitle: "Горничная", imageUrl: 'img/staff-card/staff-card4.svg', age: "40", experience: "2", number: "+7 (111)-111-11-11", mail: "rodua@mail.ru"},
+        {id: "3", title: "Артемов Артем Сергеевич", jobTitle: "Разгельдяй", imageUrl: 'img/staff-card/staff-card4.svg', age: "30", experience: "3", number: "+7 (000)-000-00-00", mail: "artem@mail.ru"},
+        {id: "4", title: "Динь Куок Ань", jobTitle: "Разгельдяй", imageUrl: 'img/staff-card/staff-card4.svg', age: "30", experience: "8", number: "+7 (222)-222-22-22", mail: "dinh@mail.ru"},
+        {id: "5", title: "Савченко Владислав Андреевич", jobTitle: "Разгельдяй", imageUrl: 'img/staff-card/staff-card4.svg', age: "34", experience: "6", number: "+7 (333)-333-33-33", mail: "vlad@mail.ru"},
+        {id: "6", title: "Семенов Олег Михайлович", jobTitle: "Разгельдяй", imageUrl: 'img/staff-card/staff-card4.svg', age: "27", experience: "4", number: "+7 (444)-444-44-44", mail: "oleg@mail.ru"},
     ])
 
     //Отображение карточек на странице
@@ -72,7 +72,7 @@ function Staff() {
     //Добавление нового сотрудника при нажатии кнопки Добавить
     const updateItems = (items) => {
         if(goAdddedPage === true) {
-            setItems((items) => [...items, {id: id, title: valueName, jobTitle: valueJob, imageUrl: 'img/staff-card/staff-card.jpg', age: valueAge, experience: valueExp, number: valueNumber, mail: valueMail}])
+            setItems((items) => [...items, {id: id, title: valueName, jobTitle: valueJob, imageUrl: 'img/staff-card/staff-card4.svg', age: valueAge, experience: valueExp, number: valueNumber, mail: valueMail}])
             setId(id + 1)
         }
     }

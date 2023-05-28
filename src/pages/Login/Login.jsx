@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FormControlLabel, Checkbox } from '@mui/material';
 import { MuiTelInput } from 'mui-tel-input'
+import './index.scss'
 
 function Login() {
     const [visiblePass, setVisiblePass] = useState(false);

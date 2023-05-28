@@ -6,6 +6,7 @@ import LeftPanel from './components/LeftPanel';
 import Modal from './modals/Modal'
 
 import Login from './pages/Login/Login';
+import Settings from './pages/Settings/Settings';
 import Home from './pages/Home/Home';
 import Registration from './pages/Registration/Registration';
 import Guests from './pages/Guests/Guests';
@@ -27,6 +28,14 @@ function App() {
           <>
           <div className="login">
             <Login />
+          </div>
+          </>
+          } />
+
+          <Route path="hotel-management/settings" exact element={
+          <>
+          <div className="settings">
+            <Settings />
           </div>
           </>
           } />
@@ -92,7 +101,6 @@ function App() {
           } />
 
         </Routes>
-        {/* <button onClick={() => setModalActive(true)} /> */}
         
         <Modal active={modalActive} setActive={setModalActive}>
           <div className="bottom">
@@ -115,7 +123,6 @@ function App() {
           </ul>
         </Modal>
         
-      {/* </div> */}
     </div>
   );
 }

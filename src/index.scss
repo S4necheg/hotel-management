@@ -105,52 +105,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-
-
-  .authorization {
-    background: #ffffff;
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04);
-    border-radius: 10px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 480px;
-    height: 580px;
-  }
-
-  .color-text {
-    color: #66CDAA;
-  }
-
-  h2 {
-    margin: 0px;
-  }
-  .inputLogin {
-    border: none;
-    font-size: 14px;
-    font-family: 'Inter', system-ui;
-    width: 100%;
-  }
-
-  .inputPass {
-    border: 1px solid #b1b3b1;
-    border-radius: 10px;
-    background-color:#F4F8FB;
-
-    padding: 18px;
-    font-size: 14px;
-    width: 100%;
-    
-    &:hover {
-      border-color: black;
-    }
-
-    &:focus{
-      border: 1px solid;
-      outline: 1px solid rgb(25, 118, 210);
-      border-color: rgb(25, 118, 210);
-    }
-  }
-
+  //настройка поля login
   .css-1q6at85-MuiInputBase-root-MuiOutlinedInput-root {
     border: none;
     border-radius: 10px;
@@ -171,40 +126,13 @@ header {
       border: none;
     }
   }
-
-  .pass-icon {
-    position: relative;
-    right: -130px;
-    top: -40px;
-    cursor: pointer;
-  }
-
-  .input-checkbox {
-    white-space: nowrap;
-    font-size: 14px;
-    width: 100%;
-    margin-top: -15px;
-  }
-
-  .css-j204z7-MuiFormControlLabel-root .MuiFormControlLabel-label {
-    font-size: 14px;
-    font-family: 'Inter', system-ui;
-    opacity: 0.5;
-  }
-
-  .button-auto {
-    border: 1px solid #f3f3f3;
-    border-radius: 10px;
-    background:#66CDAA;
-    padding: 12px;
-    width: 302.23px;
-    cursor: pointer;
-
-    &:hover {
-      background-color:#76f0c7;
-      transition: 0.5s;
-    }
-  }
 }
 
-
+.settings {
+  background-color: #F4F8FB;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
