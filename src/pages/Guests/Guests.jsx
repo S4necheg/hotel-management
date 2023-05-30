@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './index.scss'
+import axios from 'axios';
+import AppContext from '../../context';
 
 import { TablePagination, TableContainer, IconButton, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
@@ -7,8 +9,10 @@ import { Alert, AlertTitle } from '@mui/material';
 
 import TextField from '@mui/material/TextField';
 
+import NET from '../../network'
+
 function Guests() {
-    // const guests = [
+    // const [rows, setRows] = useState([
     //     {id: '1', firstName: 'Артем', lastName: 'Артемов', numberRoom: '101', dateIn: '18.05.2023', dateOut: '24.05.2023'},
     //     {id: '2', firstName: 'Динь', lastName: 'Куок', numberRoom: '102', dateIn: '18.05.2023', dateOut: '24.05.2023'},
     //     {id: '3', firstName: 'Родион', lastName: 'Манушаков', numberRoom: '103', dateIn: '18.05.2023', dateOut: '24.05.2023'},
@@ -16,27 +20,22 @@ function Guests() {
     //     {id: '5', firstName: 'Владислав', lastName: 'Савченко', numberRoom: '105', dateIn: '18.05.2023', dateOut: '24.05.2023'},
     //     {id: '6', firstName: 'Олег', lastName: 'Семенов', numberRoom: '106', dateIn: '18.05.2023', dateOut: '24.05.2023'},
     //     {id: '7', firstName: 'Алина', lastName: 'Турабоева', numberRoom: '107', dateIn: '18.05.2023', dateOut: '24.05.2023'},
-    //     {id: '8', firstName: 'Артем', lastName: 'Артемов', numberRoom: '101', dateIn: '18.05.2023', dateOut: '24.05.2023'},
-    //     {id: '9', firstName: 'Динь', lastName: 'Куок', numberRoom: '102', dateIn: '18.05.2023', dateOut: '24.05.2023'},
-    //     {id: '10', firstName: 'Родион', lastName: 'Манушаков', numberRoom: '103', dateIn: '18.05.2023', dateOut: '24.05.2023'},
-    //     {id: '11', firstName: 'Александр', lastName: 'Муханин', numberRoom: '104', dateIn: '18.05.2023', dateOut: '24.05.2023'},
-    //     {id: '12', firstName: 'Владислав', lastName: 'Савченко', numberRoom: '105', dateIn: '18.05.2023', dateOut: '24.05.2023'},
-    // ]
+    // ])
 
-    const [rows, setRows] = useState([
-        {id: '1', firstName: 'Артем', lastName: 'Артемов', numberRoom: '101', dateIn: '18.05.2023', dateOut: '24.05.2023'},
-        {id: '2', firstName: 'Динь', lastName: 'Куок', numberRoom: '102', dateIn: '18.05.2023', dateOut: '24.05.2023'},
-        {id: '3', firstName: 'Родион', lastName: 'Манушаков', numberRoom: '103', dateIn: '18.05.2023', dateOut: '24.05.2023'},
-        {id: '4', firstName: 'Александр', lastName: 'Муханин', numberRoom: '104', dateIn: '18.05.2023', dateOut: '24.05.2023'},
-        {id: '5', firstName: 'Владислав', lastName: 'Савченко', numberRoom: '105', dateIn: '18.05.2023', dateOut: '24.05.2023'},
-        {id: '6', firstName: 'Олег', lastName: 'Семенов', numberRoom: '106', dateIn: '18.05.2023', dateOut: '24.05.2023'},
-        {id: '7', firstName: 'Алина', lastName: 'Турабоева', numberRoom: '107', dateIn: '18.05.2023', dateOut: '24.05.2023'},
-    ])
-    const [alert, setAlert] = useState(false)
+    const {rows, setRows} = React.useContext(AppContext)
+
     //Удаление записи
     const removeRows = (id) => {
-        setRows(rows.filter((rows) => rows.id !== id ))
-        setAlert(true)
+        try {
+            setRows(rows.filter((rows) => rows.id !== id ))
+            setAlert(true)
+            const newArray = rows.filter(item => item.id !== id);
+            const updatedArray = newArray.map((item, index) => ({ ...item, id: index + 1 }));
+            axios.delete(`${NET.APP_URL}/guests/${id}`)
+            setRows(updatedArray)
+        } catch (error) {
+            setErrorAlert(true)
+        }
     }
 
     const [page, setPage] = React.useState(0);
@@ -52,12 +51,16 @@ function Guests() {
       };
 
     const [goAdddedPage, setGoAddedPage] = useState(false)
+    //Alert на успешное удаление сотрудника
+    const [alert, setAlert] = useState(false)
+    //Alert на неудачное удаление сотрудника
+    const [errorAlert, setErrorAlert] = useState(false)
     //Alert для успешного создания новой записи
     const [addGuest, setAddGuest] = useState(false)
     //Alert при неудачном создании записи
     const [errorAddGuest, setErrorAddGuest] = useState(false)
-    //ID для новых записей
-    const [id, setId] = useState(rows.length + 1)
+    //Alert при незаполненом поле у новой записи
+    const [errorTextField, setErrorTextField] = useState(false)
     //Поля для новой записи
     const [valueFN, setValueFN] = useState("")
     const [valueLN, setValueLN] = useState("")
@@ -83,10 +86,14 @@ function Guests() {
     }
     //Добавление новой записи при нажатии кнопки Добавить
     const updateRows = (rows) => {
-        console.log(addGuest)
-        if(goAdddedPage === true) {
-           setRows((rows) => [...rows, {id: id, firstName: valueFN, lastName: valueLN, numberRoom: valueNR, dateIn: valueDI, dateOut: valueDO}])
-           setId(id + 1)
+        try {
+            if(goAdddedPage === true) { 
+               const newRow = {id: rows.length + 1, firstName: valueFN, lastName: valueLN, numberRoom: valueNR, dateIn: valueDI, dateOut: valueDO}
+               setRows((rows) => [...rows, newRow])
+               axios.post(`${NET.APP_URL}/guests`, newRow);
+            }
+        } catch (error) {
+            setErrorAddGuest(true)
         }
     }
     //Очистка полей при повторном нажатии кнопки Добавить
@@ -141,7 +148,7 @@ function Guests() {
             } else {
                 setErrorDO(false)
             }
-            setErrorAddGuest(true)
+            setErrorTextField(true)
         }
     }
 
@@ -273,8 +280,10 @@ function Guests() {
             </div>
             )}
             {alert ? <Alert className='Alert' onClose={() => setAlert(false)} severity="success"><AlertTitle>Успешно</AlertTitle>Запись удалена!</Alert> : null}
+            {errorAlert ? <Alert className='Alert' onClose={() => setErrorAlert(false)} severity="error"><AlertTitle>Ошибка</AlertTitle>Неудалось удалить запись!</Alert> : null}
             {addGuest ? <Alert className='Alert' onClose={() => setAddGuest(false)} severity="success"><AlertTitle>Успешно</AlertTitle>Запись добавлена!</Alert> : null}
-            {errorAddGuest ? <Alert className='Alert' onClose={() => setErrorAddGuest(false)} severity="error"><AlertTitle>Ошибка</AlertTitle>Заполните все поля!</Alert> : null}
+            {errorAddGuest ? <Alert className='Alert' onClose={() => setErrorAddGuest(false)} severity="error"><AlertTitle>Ошибка</AlertTitle>Ошибка при добавлении записи!</Alert> : null}
+            {errorTextField ? <Alert className='Alert' onClose={() => setErrorTextField(false)} severity="error"><AlertTitle>Ошибка</AlertTitle>Заполните все поля!</Alert> : null}
         </div>
     ) 
 }

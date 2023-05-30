@@ -1,23 +1,27 @@
 import React, { useState } from 'react';
 import './index.scss'
+import axios from 'axios';
+import AppContext from '../../context';
 
 import Card from '../../components/Card/Card';
 
 import { Alert, AlertTitle } from '@mui/material';
 import TextField from '@mui/material/TextField';
 
+import NET from '../../network'
+
 function Staff() {
     const [goAdddedPage, setGoAddedPage] = useState(false)
 
-
-    const [items, setItems] = useState([
-        {id: "1", title: "Муханин Александр Алексеевич", jobTitle: "Администратор", imageUrl: 'img/staff-card/staff-card4.svg', age: "36", experience: "4", number: "+7 (989)-123-45-67", mail: "a.muxanin@mail.ru"},
-        {id: "2", title: "Манушаков Родион Каренович", jobTitle: "Горничная", imageUrl: 'img/staff-card/staff-card4.svg', age: "40", experience: "2", number: "+7 (111)-111-11-11", mail: "rodua@mail.ru"},
-        {id: "3", title: "Артемов Артем Сергеевич", jobTitle: "Разгельдяй", imageUrl: 'img/staff-card/staff-card4.svg', age: "30", experience: "3", number: "+7 (000)-000-00-00", mail: "artem@mail.ru"},
-        {id: "4", title: "Динь Куок Ань", jobTitle: "Разгельдяй", imageUrl: 'img/staff-card/staff-card4.svg', age: "30", experience: "8", number: "+7 (222)-222-22-22", mail: "dinh@mail.ru"},
-        {id: "5", title: "Савченко Владислав Андреевич", jobTitle: "Разгельдяй", imageUrl: 'img/staff-card/staff-card4.svg', age: "34", experience: "6", number: "+7 (333)-333-33-33", mail: "vlad@mail.ru"},
-        {id: "6", title: "Семенов Олег Михайлович", jobTitle: "Разгельдяй", imageUrl: 'img/staff-card/staff-card4.svg', age: "27", experience: "4", number: "+7 (444)-444-44-44", mail: "oleg@mail.ru"},
-    ])
+    const {items, setItems} = React.useContext(AppContext)
+    // const [items, setItems] = useState([
+    //     {id: "1", title: "Муханин Александр Алексеевич", jobTitle: "Администратор", imageUrl: 'img/staff-card/staff-card4.svg', age: "36", experience: "4", number: "+7 (989)-123-45-67", mail: "a.muxanin@mail.ru"},
+    //     {id: "2", title: "Манушаков Родион Каренович", jobTitle: "Горничная", imageUrl: 'img/staff-card/staff-card4.svg', age: "40", experience: "2", number: "+7 (111)-111-11-11", mail: "rodua@mail.ru"},
+    //     {id: "3", title: "Артемов Артем Сергеевич", jobTitle: "Разгельдяй", imageUrl: 'img/staff-card/staff-card4.svg', age: "30", experience: "3", number: "+7 (000)-000-00-00", mail: "artem@mail.ru"},
+    //     {id: "4", title: "Динь Куок Ань", jobTitle: "Разгельдяй", imageUrl: 'img/staff-card/staff-card4.svg', age: "30", experience: "8", number: "+7 (222)-222-22-22", mail: "dinh@mail.ru"},
+    //     {id: "5", title: "Савченко Владислав Андреевич", jobTitle: "Разгельдяй", imageUrl: 'img/staff-card/staff-card4.svg', age: "34", experience: "6", number: "+7 (333)-333-33-33", mail: "vlad@mail.ru"},
+    //     {id: "6", title: "Семенов Олег Михайлович", jobTitle: "Разгельдяй", imageUrl: 'img/staff-card/staff-card4.svg', age: "27", experience: "4", number: "+7 (444)-444-44-44", mail: "oleg@mail.ru"},
+    // ])
 
     //Отображение карточек на странице
     const renderItems = () => {
@@ -41,8 +45,8 @@ function Staff() {
     const [addStaff, setAddStaff] = useState(false)
     //Alert при неудачном создании записи
     const [errorAddStaff, setErrorAddStaff] = useState(false)
-    //ID для новых записей
-    const [id, setId] = useState(items.length + 1)
+    //Alert при незаполненом поле у новой записи
+    const [errorTextField, setErrorTextField] = useState(false)
     //Поля для новой записи
     const [valueName, setValueName] = useState("")
     const [valueJob, setValueJob] = useState("")
@@ -71,9 +75,14 @@ function Staff() {
     }
     //Добавление нового сотрудника при нажатии кнопки Добавить
     const updateItems = (items) => {
-        if(goAdddedPage === true) {
-            setItems((items) => [...items, {id: id, title: valueName, jobTitle: valueJob, imageUrl: 'img/staff-card/staff-card4.svg', age: valueAge, experience: valueExp, number: valueNumber, mail: valueMail}])
-            setId(id + 1)
+        try {
+            if(goAdddedPage === true) {
+                const newItem = {id: items.length + 1, title: valueName, jobTitle: valueJob, imageUrl: 'img/staff-card/staff-card4.svg', age: valueAge, experience: valueExp, number: valueNumber, mail: valueMail}
+                setItems((items) => [...items, newItem])
+                axios.post(`${NET.APP_URL}/staff`, newItem);
+            }
+        } catch (error) {
+            setErrorAddStaff(true)
         }
     }
     //Очистка полей при повторном нажатии кнопки Добавить
@@ -135,7 +144,7 @@ function Staff() {
             } else {
                 setErrorMail(false)
             }
-            setErrorAddStaff(true)
+            setErrorTextField(true)
         }
     }
 
@@ -209,7 +218,7 @@ function Staff() {
                         id="outlined-required"
                         label="e-mail"
                         variant="outlined"
-                        placeholder="Пример ввода: user@mail.ru"
+                        placeholder="exapmle@mail.ru"
                         value={valueMail}
                         onChange={handleChangeMail}
                     />
@@ -227,7 +236,8 @@ function Staff() {
             </div>
             )}
             {addStaff ? <Alert className='Alert' onClose={() => setAddStaff(false)} severity="success"><AlertTitle>Успешно</AlertTitle>Запись добавлена!</Alert> : null}
-            {errorAddStaff ? <Alert className='Alert' onClose={() => setErrorAddStaff(false)} severity="error"><AlertTitle>Ошибка</AlertTitle>Заполните все поля!</Alert> : null}
+            {errorAddStaff ? <Alert className='Alert' onClose={() => setErrorAddStaff(false)} severity="error"><AlertTitle>Ошибка</AlertTitle>Ошибка при добавлении сотрудника!</Alert> : null}
+            {errorTextField ? <Alert className='Alert' onClose={() => setErrorTextField(false)} severity="error"><AlertTitle>Ошибка</AlertTitle>Заполните все поля!</Alert> : null}
         </div>
         
     ) 

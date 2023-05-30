@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Routes, Route, Link } from 'react-router-dom';
+import axios from 'axios';
 
+import AppContext from './context';
 import Header from './components/Header';
 import LeftPanel from './components/LeftPanel';
 import Modal from './modals/Modal'
@@ -14,10 +16,33 @@ import Staff from './pages/Staff/Staff';
 import Schedule from './pages/Schedule/Schedule';
 import Services from './pages/Services/Services';
 
+import NET from './network'
+
 function App() {
   const [modalActive, setModalActive] = useState(false);
+  //информация о гостях
+  const [rows, setRows] = useState([]);
+  //информация о сотрудниках
+  const [items, setItems] = useState([])
+  //получаем данные с бека
+  React.useEffect(() => {
+    async function fetchData() { 
+      try {
+        const rowsResponse = await axios.get(`${NET.APP_URL}/guests`);
+        const itemsResponse = await axios.get(`${NET.APP_URL}/staff`);
+
+        setRows(rowsResponse.data);
+        setItems(itemsResponse.data);
+      } catch (error) {
+        alert('Ошибка при запросе данных')
+      }
+    }
+
+    fetchData();
+  }, []);
 
   return (
+    <AppContext.Provider value={{rows, setRows, items, setItems}} >
     <div className="header clear">
       {/* <Header />
       <div className="content p-50 d-if">
@@ -124,6 +149,7 @@ function App() {
         </Modal>
         
     </div>
+    </AppContext.Provider>
   );
 }
 

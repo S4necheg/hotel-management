@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
 import '../../pages/Staff/index.scss'
+import axios from 'axios';
 
 import ModalStaff from '../../pages/Staff/ModalStaff'
 
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { Alert, AlertTitle } from '@mui/material';
 import {IconButton} from '@mui/material';
+
+import NET from '../../network'
 
 function Card({
     id,  
@@ -22,11 +25,22 @@ function Card({
     const [modalActive, setModalActive] = useState(false);
     //Alert на успешное удаление сотрудника
     const [alert, setAlert] = useState(false)
+    //Alert на неудачное удаление сотрудника
+    const [errorAlert, setErrorAlert] = useState(false)
     //Удаление записи
     const removeCard = (id) => {
-        setItems(items.filter((items) => items.id !== id ))
-        setAlert(true)
+        try {
+            setItems(items.filter((items) => items.id !== id ))
+            setAlert(true)
+            const newArray = items.filter(item => item.id !== id);
+            const updatedArray = newArray.map((item, index) => ({ ...item, id: index + 1 }));
+            axios.delete(`${NET.APP_URL}/staff/${id}`)
+            setItems(updatedArray)
+        } catch (error) {
+            setErrorAlert(true)
+        }
     }
+
     return (
         <>
         <div className='card' onClick={() => {setModalActive(true)}}>
@@ -66,6 +80,7 @@ function Card({
             </div>
         }/>
         {alert ? <Alert className='Alert' onClose={() => setAlert(false)} severity="success"><AlertTitle>Успешно</AlertTitle>Запись удалена!</Alert> : null}
+        {errorAlert ? <Alert className='Alert' onClose={() => setErrorAlert(false)} severity="error"><AlertTitle>Ошибка</AlertTitle>Неудалось удалить сотрудника!</Alert> : null}
         </>
     )
 }
