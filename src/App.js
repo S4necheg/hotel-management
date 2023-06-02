@@ -24,15 +24,24 @@ function App() {
   const [rows, setRows] = useState([]);
   //информация о сотрудниках
   const [items, setItems] = useState([])
+  //информация о графике работы
+  const [workSchedule, setWorkSchedule] = useState([])
+  // const [state, setState] = useState('')
+  // const email = "test@mail.ru"
+  // const password = "12345"
   //получаем данные с бека
   React.useEffect(() => {
     async function fetchData() { 
       try {
         const rowsResponse = await axios.get(`${NET.APP_URL}/guests`);
         const itemsResponse = await axios.get(`${NET.APP_URL}/staff`);
+        // const responceState = await axios.get(`${NET.APP_URL}/login?email=${email}&password=${password}`);
+        const workScheduleResponse = await axios.get(`${NET.APP_URL}/work_schedules`);
 
         setRows(rowsResponse.data);
         setItems(itemsResponse.data);
+        setWorkSchedule(workScheduleResponse.data);
+        // setState(responceState.data)
       } catch (error) {
         alert('Ошибка при запросе данных')
       }
@@ -42,7 +51,7 @@ function App() {
   }, []);
 
   return (
-    <AppContext.Provider value={{rows, setRows, items, setItems}} >
+    <AppContext.Provider value={{rows, setRows, items, setItems, workSchedule, setWorkSchedule}} >
     <div className="header clear">
       {/* <Header />
       <div className="content p-50 d-if">

@@ -8,7 +8,7 @@ import Card from '../../components/Card/Card';
 import { Alert, AlertTitle } from '@mui/material';
 import TextField from '@mui/material/TextField';
 
-import NET from '../../network'
+import NET from '../../network';
 
 function Staff() {
     const [goAdddedPage, setGoAddedPage] = useState(false)

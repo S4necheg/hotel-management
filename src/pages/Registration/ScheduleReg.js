@@ -1,4 +1,5 @@
 import * as React from 'react';
+import moment from 'moment';
 import Paper from '@mui/material/Paper';
 import { ViewState, EditingState, IntegratedEditing } from '@devexpress/dx-react-scheduler';
 import {
@@ -24,7 +25,7 @@ export const classes = {
   formControlLabel: `${PREFIX}-formControlLabel`,
 };
 
-let currentDate = '2023-05-27';
+let currentDate = moment();
 
 export default () => {
   const [data, setData] = React.useState(appointments);

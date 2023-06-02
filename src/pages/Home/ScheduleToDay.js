@@ -7,7 +7,7 @@ import {
   AppointmentTooltip,
 } from '@devexpress/dx-react-scheduler-material-ui';
 
-import appointments from './demo-data/today-appointments';
+import {appointments} from './demo-data/appointments';
 
 
 function ScheduleToDay() {
