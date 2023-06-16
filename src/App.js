@@ -14,7 +14,7 @@ import Registration from './pages/Registration/Registration';
 import Guests from './pages/Guests/Guests';
 import Staff from './pages/Staff/Staff';
 import Schedule from './pages/Schedule/Schedule';
-import Services from './pages/Services/Services';
+// import Services from './pages/Services/Services';
 
 import NET from './network'
 
@@ -26,22 +26,43 @@ function App() {
   const [items, setItems] = useState([])
   //информация о графике работы
   const [workSchedule, setWorkSchedule] = useState([])
-  // const [state, setState] = useState('')
-  // const email = "test@mail.ru"
-  // const password = "12345"
+  //информация о регистрациях
+  const [checkIn, setCheckIn] = useState([])
+  //информация о заселениях
+  const [arrival, setArrival] = useState([])
+  //информация о выселениях
+  const [departure, setDeparture] = useState([])
+  // //информация об авторизованном пользователе
+  // const [users, setUsers] = useState([])
+  //состояние загрузки
+  const [isLoading, setIsLoading] = React.useState(true);
   //получаем данные с бека
   React.useEffect(() => {
     async function fetchData() { 
       try {
+        const workScheduleResponse = await axios.get(`${NET.APP_URL}/work_schedules`);
         const rowsResponse = await axios.get(`${NET.APP_URL}/guests`);
         const itemsResponse = await axios.get(`${NET.APP_URL}/staff`);
-        // const responceState = await axios.get(`${NET.APP_URL}/login?email=${email}&password=${password}`);
-        const workScheduleResponse = await axios.get(`${NET.APP_URL}/work_schedules`);
+        const checkInResponse = await axios.get(`${NET.APP_URL}/registrations`);
+        const arrivalResponse = await axios.get(`${NET.APP_URL}/arrival_to_days`);
+        const departureResponse = await axios.get(`${NET.APP_URL}/departure_to_days`);
 
+        // const usersResponse = await axios.get(`${NET.APP_URL}/users`);
+
+        // if (request.data.status === 'OK') {
+        //   const usersResponse = await axios.get(`${NET.APP_URL}/users`);
+        //   setUsers(usersResponse.data)
+        // }
+
+        setIsLoading(false)
+
+        setWorkSchedule(workScheduleResponse.data);
         setRows(rowsResponse.data);
         setItems(itemsResponse.data);
-        setWorkSchedule(workScheduleResponse.data);
-        // setState(responceState.data)
+        setCheckIn(checkInResponse.data);
+        setArrival(arrivalResponse.data);
+        setDeparture(departureResponse.data);
+        // setUsers(usersResponse.data)
       } catch (error) {
         alert('Ошибка при запросе данных')
       }
@@ -51,7 +72,7 @@ function App() {
   }, []);
 
   return (
-    <AppContext.Provider value={{rows, setRows, items, setItems, workSchedule, setWorkSchedule}} >
+    <AppContext.Provider value={{rows, setRows, items, setItems, workSchedule, setWorkSchedule, checkIn, setCheckIn, arrival, departure}} >
     <div className="header clear">
       {/* <Header />
       <div className="content p-50 d-if">
@@ -79,7 +100,9 @@ function App() {
           <Header setModalActive={setModalActive} />
           <div className="content p-40 d-if">
             <LeftPanel />
-            <Home />
+            <Home 
+            isLoading = {isLoading}
+            />
           </div>
           </>
           } />
@@ -89,7 +112,9 @@ function App() {
           <Header setModalActive={setModalActive} />
           <div className="content p-40 d-if">
             <LeftPanel />
-            <Registration />
+            <Registration 
+            isLoading = {isLoading}
+            />
           </div>
           </>
           } />
@@ -99,7 +124,9 @@ function App() {
           <Header setModalActive={setModalActive} />
           <div className="content p-40 d-if">
             <LeftPanel />
-            <Guests />
+            <Guests 
+            isLoading = {isLoading}
+            />
           </div>
           </>
           } />
@@ -109,7 +136,9 @@ function App() {
           <Header setModalActive={setModalActive} />
           <div className="content p-40 d-if">
             <LeftPanel />
-            <Staff />
+            <Staff 
+            isLoading = {isLoading}
+            />
           </div>
           </>
           } />
@@ -119,12 +148,14 @@ function App() {
           <Header setModalActive={setModalActive} />
           <div className="content p-40 d-if">
             <LeftPanel />
-            <Schedule />
+            <Schedule 
+            isLoading={isLoading}
+            />
           </div>
           </>
           } />
 
-          <Route path="hotel-management/services" element={
+          {/* <Route path="hotel-management/services" element={
           <>
           <Header setModalActive={setModalActive} />
           <div className="content p-40 d-if">
@@ -132,7 +163,7 @@ function App() {
             <Services />
           </div>
           </>
-          } />
+          } /> */}
 
         </Routes>
         

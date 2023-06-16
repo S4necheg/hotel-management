@@ -75,3 +75,20 @@
       transition: 0.5s;
     }
   }
+
+  .Alert {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    animation: 0.5s showAlert;
+  }
+
+  @keyframes showAlert {
+    from {
+      transform: translateX(100px)
+    }
+
+    to {
+      transform: translateX(0px);
+    }
+  }

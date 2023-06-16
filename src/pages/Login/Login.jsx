@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { FormControlLabel, Checkbox } from '@mui/material';
 import { MuiTelInput } from 'mui-tel-input'
+import { Alert, AlertTitle } from '@mui/material';
 import './index.scss'
 
 import axios from './axios';
@@ -9,28 +10,32 @@ import axios from './axios';
 function Login() {
     const [visiblePass, setVisiblePass] = useState(false);
         //логин
-        const [phone, setPhone] = React.useState('')
+        const [phone, setPhone] = useState('')
         //пароль
-        const [password, setPassword] = React.useState('')
+        const [password, setPassword] = useState('')
 
         const navigate = useNavigate();
       
         const handleChange = (newPhone) => {
           setPhone(newPhone)
         }
+    
+    //Alert на неудачный вход
+    const [errorAlert, setErrorAlert] = useState(false)
 
-        // const handleChange = e => {
-        //     setPhone(e.target.value)
-        // (e) => setPhone(e.target.value)
-        // }
-      
     const handleLogin = async (event) => {
         event.preventDefault();
         try {
-            await axios.post('/api/login', {email: phone, password: password})
-            setPhone("")
-            setPassword("")
-            navigate("/hotel-management/")
+            const request = await axios.post('/api/login', {email: phone, password: password})
+            console.log('request', request)
+            console.log('data.status', request.data.status)
+            if (request.data.status === 'OK') {
+                setPhone("")
+                setPassword("")
+                navigate("/hotel-management/")
+            } else if (request.data.status === 'error') {
+                setErrorAlert(true)
+            }
         } catch (error) {
             console.log(error)
         }
@@ -49,7 +54,8 @@ function Login() {
                         <h2 className="color-text">Привет, с возвращением!</h2>
                         <p className="opacity-5">Введите свои данные для продолжения</p>
                         <h5 className="opacity-8">Авторизация по номеру телефона</h5>
-                        {/* <input type="tel" maxlength="17" className="mb-20" placeholder="Номер телефона" /> */}
+                        {/* <input type="tel" maxlength="17" className="mb-20" placeholder="Номер телефона" value={phone} onChange={handleChange} /> */}
+                        {/* <input type='text'  value={phone} onChange={(e) => setPhone(e.target.value)} /> */}
                         <MuiTelInput className="inputLogin mb-20" placeholder="Номер телефона" value={phone} onChange={handleChange} />
                         <input className="inputPass" type={visiblePass ? "" : "password"} value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Пароль" />
                         <span className="pass-icon" ><img width={20} height={20} src={visiblePass ? "img/eye-on.svg" : "img/eye-off.svg"} onClick={() => setVisiblePass(!visiblePass)} alt="View-pass" /></span>
@@ -57,13 +63,12 @@ function Login() {
                             <FormControlLabel control={<Checkbox defaultChecked />} label="Запомнить меня" className='clear' />
                             <span className="color-text cu-p">Забыли пароль?</span>
                         </div>
-                        {/* <Link to="/hotel-management/"> */}
                             <button className="button-auto"><span className="opacity-8">Войти</span></button>
-                        {/* </Link> */}
                     </div>
                     </form>
                 </div>
             </div>
+            {errorAlert ? <Alert className='Alert' onClose={() => setErrorAlert(false)} severity="error"><AlertTitle>Ошибка</AlertTitle>Неправильный логин или пароль!</Alert> : null}
         </div>
     )
 }

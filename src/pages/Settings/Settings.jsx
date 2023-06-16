@@ -18,22 +18,22 @@ function Settings() {
                         <h2 className="color-titlte">Настройки аккаунта</h2>
                         <ul className='settingsField'>
                             <li>
-                                <span className='titleInput'>Имя пользователя: </span> 
+                                <span className='titleInputSettings'>Имя пользователя: </span> 
                                 <input className='inputReadOnly' value="Test" readOnly></input>
                             </li>
                             <li>
-                                <span className='titleInput'>Логин: </span> 
-                                <input className='inputReadOnly' value="+7 (123) 456-78-90" readOnly></input>
+                                <span className='titleInputSettings'>Логин: </span> 
+                                <input className='inputReadOnly' value="+7 (989) 123-45-67" readOnly></input>
                             </li>
                             <li>
-                                <span className='titleInput'>Пароль: </span> 
+                                <span className='titleInputSettings'>Пароль: </span> 
                                 <div className='passInput'>
                                     <input className='inputSettingsPass' type={visiblePass ? "" : "password"} placeholder="Пароль"></input>
                                     <span className="pass-view" ><img width={20} height={20} src={visiblePass ? "img/eye-on.svg" : "img/eye-off.svg"} onClick={() => setVisiblePass(!visiblePass)} alt="View-pass" /></span>
                                 </div>
                             </li>
                             <li>
-                                <span className='titleInput'>Повторите пароль: </span> 
+                                <span className='titleInputSettings'>Повторите пароль: </span> 
                                 <div className='passInput'>
                                     <input className='inputSettingsPass' type={visiblePass ? "" : "password"} placeholder="Повторите пароль"></input>
                                     <span className="pass-view" ><img width={20} height={20} src={visiblePass ? "img/eye-on.svg" : "img/eye-off.svg"} onClick={() => setVisiblePass(!visiblePass)} alt="View-pass" /></span>

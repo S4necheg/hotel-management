@@ -16,19 +16,21 @@ import {
   DragDropProvider,
 } from '@devexpress/dx-react-scheduler-material-ui';
 
-import { appointments } from '../Home/demo-data/appointments';
+import './scheduleW.scss'
 
-const PREFIX = 'Demo';
-export const classes = {
-  container: `${PREFIX}-container`,
-  text: `${PREFIX}-text`,
-  formControlLabel: `${PREFIX}-formControlLabel`,
-};
+import { FormControlLabel, Checkbox } from '@mui/material';
+
+// import { appointments } from '../Home/demo-data/appointments';
+
+import AppContext from '../../context';
+import NET from '../../network';
+import axios from 'axios';
 
 let currentDate = moment();
 
 export default () => {
-  const [data, setData] = React.useState(appointments);
+  const {checkIn, setCheckIn} = React.useContext(AppContext)
+  const [data, setData] = React.useState(checkIn);
   const [editingOptions, setEditingOptions] = React.useState({
     allowAdding: true,
     allowDeleting: true,
@@ -46,14 +48,49 @@ export default () => {
   const onCommitChanges = React.useCallback(({ added, changed, deleted }) => {
     if (added) {
       const startingAddedId = data.length > 0 ? data[data.length - 1].id + 1 : 0;
-      setData([...data, { id: startingAddedId, ...added }]);
+      const newAdded = { id: startingAddedId, ...added }
+      setData([...data, newAdded]);
+      setCheckIn([...data, newAdded])
+      // console.log({ id: startingAddedId, ...added })
+      //запрос на добавление
+      let newArrival = {registration: startingAddedId, startDate: newAdded.startDate, location: 'blue'}
+      let newDeparture = {registration: startingAddedId, endDate: newAdded.endDate, location: 'red'}
+      axios.post(`${NET.APP_URL}/registrations`, newAdded);
+      axios.post(`${NET.APP_URL}/arrival_to_days`, newArrival)
+      axios.post(`${NET.APP_URL}/departure_to_days`, newDeparture)
     }
     if (changed) {
-      setData(data.map(appointment => (
-        changed[appointment.id] ? { ...appointment, ...changed[appointment.id] } : appointment)));
+      //id измененного объекта
+      let changedId = ''
+      let objChanged = ''
+      console.log("changed", changed)
+      const searchChange = data.map(appointment => (
+        changed[appointment.id] ? { ...appointment, ...changed[appointment.id] } : appointment))
+      console.log("seachChange",searchChange)
+      console.log("data", data)
+
+      for (let i = 0; i < searchChange.length; i++){
+        let result = JSON.stringify(searchChange[i]) === JSON.stringify(data[i])
+        if (result === false) {
+          changedId = searchChange[i].id
+          // console.log('changedId', changedId)
+          objChanged = searchChange[i]
+          // console.log('objChanged', objChanged)
+        }
+        console.log(result)
+      }
+      setData(searchChange);
+      setCheckIn(searchChange);
+      //запрос на обновление
+      console.log('changedId', changedId)
+      console.log('objChanged', objChanged)
+      axios.put(`${NET.APP_URL}/registrations/${changedId}`, objChanged)
     }
     if (deleted !== undefined) {
       setData(data.filter(appointment => appointment.id !== deleted));
+      setCheckIn(data.filter(appointment => appointment.id !== deleted))
+      //Запрос на удаление
+      axios.delete(`${NET.APP_URL}/registrations/${deleted}`)
     }
     setIsAppointmentBeingCreated(false);
   }, [setData, setIsAppointmentBeingCreated, data]);
@@ -77,17 +114,17 @@ export default () => {
     return <AppointmentForm.CommandButton id={id} {...restProps} />;
   }, [allowDeleting]);
 
-  const BasicLayout = ({ onFieldChange, appointmentData, ...restProps }) => {
-    //return <div />;
-    return (
-      <AppointmentForm.BasicLayout
-      appointmentData={appointmentData}
-      onFieldChange={onFieldChange}
-      {...restProps}   
-    >
-    </AppointmentForm.BasicLayout>
-    )
-  };
+  // const BasicLayout = ({ onFieldChange, appointmentData, ...restProps }) => {
+  //   //return <div />;
+  //   return (
+  //     <AppointmentForm.BasicLayout
+  //     appointmentData={appointmentData}
+  //     onFieldChange={onFieldChange}
+  //     {...restProps}   
+  //   >
+  //   </AppointmentForm.BasicLayout>
+  //   )
+  // };
 
   const BoolEditor = (props) => {
     return null;
@@ -100,7 +137,16 @@ export default () => {
       text="Регистрация гостя"
       />  
     } else if (props.text === 'More Information') {
-      return null
+      return <><AppointmentForm.Label
+      { ...props}
+      text="Информация о заселении"
+      />
+      {/* <AppointmentForm.TextEditor
+      { ...props}
+      type='numberEditor'
+      placeholder='Цена'
+      /> */}
+      </>
     } else if (props.text === '-') {
       return <AppointmentForm.Label
       { ...props}
@@ -110,26 +156,33 @@ export default () => {
 
   const InputComponent = (props) => {
     if (props.type === 'titleTextEditor') {
-      return <AppointmentForm.TextEditor
-      { ...props}
-      type='textEditor'
-      placeholder='ФИО'
-      />
+      // <AppointmentForm.TextEditor
+      // { ...props}
+      // type='textEditor'
+      // placeholder='ФИО'
+      // />
+     return <input className='titleInput' type='text' placeholder='ФИО'/>
     }
 
-    return <><AppointmentForm.Select
-    { ...props}
-    availableOptions={[]}
-    />
-    <AppointmentForm.TextEditor
-    { ...props}
-    type='numberEditor'
-    placeholder='Цена'
-    />
-    <AppointmentForm.BooleanEditor
-    { ...props}
-    label="Оплачено?"
-    />
+    // return <>
+    // <AppointmentForm.Select
+    // { ...props}
+    // availableOptions={[]}
+    // />
+    // <AppointmentForm.TextEditor
+    // { ...props}
+    // type='numberEditor'
+    // placeholder='Цена'
+    // />
+    // <AppointmentForm.BooleanEditor
+    // { ...props}
+    // label="Оплачено?"
+    // />
+    // </>
+    return <>
+      <input className='roomInput' type='number' placeholder='Номер комнаты' />
+      <input className='priceInput' type='number' placeholder='Цена' />
+      <FormControlLabel control={<Checkbox defaultChecked />} label="Оплачено?" />
     </>
   };
 
@@ -182,7 +235,9 @@ export default () => {
 
           <DateNavigator />
 
-          <TodayButton />
+          <TodayButton 
+            messages={{today: 'Сегодня'}}
+          />
 
           <ViewSwitcher />
 
@@ -193,8 +248,11 @@ export default () => {
             showDeleteButton={allowDeleting}
           />
           <AppointmentForm
-            basicLayoutComponent={BasicLayout}
-            textEditorComponent={InputComponent}
+            messages={{commitCommand: 'Сохранить',
+            titleLabel: 'ФИО',
+            notesLabel: 'Номер, цена, статус оплаты'}}
+            // basicLayoutComponent={BasicLayout}
+            // textEditorComponent={InputComponent}
             booleanEditorComponent={BoolEditor}
             labelComponent={LabelComponent}
 

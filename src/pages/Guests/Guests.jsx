@@ -11,7 +11,9 @@ import TextField from '@mui/material/TextField';
 
 import NET from '../../network'
 
-function Guests() {
+import ContentLoader from "react-content-loader";
+
+function Guests({isLoading}) {
     // const [rows, setRows] = useState([
     //     {id: '1', firstName: 'Артем', lastName: 'Артемов', numberRoom: '101', dateIn: '18.05.2023', dateOut: '24.05.2023'},
     //     {id: '2', firstName: 'Динь', lastName: 'Куок', numberRoom: '102', dateIn: '18.05.2023', dateOut: '24.05.2023'},
@@ -91,6 +93,7 @@ function Guests() {
                const newRow = {id: rows.length + 1, firstName: valueFN, lastName: valueLN, numberRoom: valueNR, dateIn: valueDI, dateOut: valueDO}
                setRows((rows) => [...rows, newRow])
                axios.post(`${NET.APP_URL}/guests`, newRow);
+               axios.post(`${NET.APP_URL}/guests_data`, newRow); //Таблица со всеми гостями за все время
             }
         } catch (error) {
             setErrorAddGuest(true)
@@ -223,6 +226,17 @@ function Guests() {
                         <h3>Гости</h3>
                         <span onClick={() => {setGoAddedPage(true); setAddGuest(false); cleanField()}}>Добавить</span>
                     </div>
+                    {isLoading ?                 
+                    ( <ContentLoader 
+                        speed={2}
+                        width={1400}
+                        height={630}
+                        viewBox="0 0 1400 630"
+                        backgroundColor="#FFFFFF"
+                        foregroundColor="#F4F8FB"
+                    >
+                    <rect x="0" y="0" rx="10" ry="10" width="1400" height="630" />
+                  </ContentLoader>) : (
                     <TableContainer className='Container' maxWidth={1360} maxHeight={660}>
                         <Table>
                             <TableHead className='tableHeader' >
@@ -267,6 +281,7 @@ function Guests() {
                             </TableBody>
                         </Table>
                     </TableContainer>
+                  )}
                 </div>
                     <TablePagination
                         rowsPerPageOptions={[5, 7]}

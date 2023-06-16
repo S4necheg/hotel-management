@@ -334,7 +334,9 @@ export default () => {
 
           <DateNavigator />
 
-          <TodayButton />
+          <TodayButton
+            messages={{today: 'Сегодня'}}
+          />
           
           <ViewSwitcher />
 
@@ -345,6 +347,9 @@ export default () => {
             showDeleteButton={allowDeleting}
           />
           <AppointmentForm
+            messages={{commitCommand: 'Сохранить',
+            titleLabel: 'ФИО',
+            notesLabel: 'Заметки'}}
             // basicLayoutComponent={BasicLayout}
             // textEditorComponent={InputComponent}
             booleanEditorComponent={BoolEditor}

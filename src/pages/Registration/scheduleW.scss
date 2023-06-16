@@ -1,0 +1,57 @@
+.titleInput {
+    border: 1px solid #b1b3b1;
+    border-radius: 4px;
+
+    padding: 18px;
+    font-size: 18px;
+    width: 98.5%;
+    
+    &:hover {
+      border-color: black;
+    }
+
+    &:focus{
+      border: 1px solid;
+      outline: 1px solid rgb(25, 118, 210);
+      border-color: rgb(25, 118, 210);
+    }
+}
+
+.roomInput {
+    border: 1px solid #b1b3b1;
+    border-radius: 4px;
+
+    padding: 18px;
+    font-size: 18px;
+    width: 98.5%;
+    
+    &:hover {
+      border-color: black;
+    }
+
+    &:focus{
+      border: 1px solid;
+      outline: 1px solid rgb(25, 118, 210);
+      border-color: rgb(25, 118, 210);
+    }
+}
+
+.priceInput {
+    border: 1px solid #b1b3b1;
+    border-radius: 4px;
+
+    padding: 18px;
+    margin-top: 15px;
+    font-size: 18px;
+    width: 98.5%;
+    
+    &:hover {
+      border-color: black;
+    }
+
+    &:focus{
+      border: 1px solid;
+      outline: 1px solid rgb(25, 118, 210);
+      border-color: rgb(25, 118, 210);
+    }
+}

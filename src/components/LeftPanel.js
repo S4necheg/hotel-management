@@ -42,12 +42,12 @@ function LeftPanel() {
                     <span>График работы</span>
                 </li>
               </Link>
-              <Link to="/hotel-management/services">
+              {/* <Link to="/hotel-management/services">
                 <li className={active === 'serv' ? "nav_item cu-p p-15" : "cu-p p-15"} onClick={() => setActive('serv')}>
                     <img width={20} height={20} src="img/services.svg" alt="Services" />
                     <span>Услуги</span>
                 </li>
-              </Link>
+              </Link> */}
               </div>
             </ul>
         </div>

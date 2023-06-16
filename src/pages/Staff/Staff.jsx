@@ -10,7 +10,9 @@ import TextField from '@mui/material/TextField';
 
 import NET from '../../network';
 
-function Staff() {
+import ContentLoader from "react-content-loader";
+
+function Staff({isLoading}) {
     const [goAdddedPage, setGoAddedPage] = useState(false)
 
     const {items, setItems} = React.useContext(AppContext)
@@ -232,7 +234,20 @@ function Staff() {
                     <h3>Список сотрудников</h3>
                     <span onClick={() => {setGoAddedPage(true); setAddStaff(false); cleanField()}}>Добавить</span>
                 </div>
-                {renderItems()}
+                {isLoading ?                 
+                    ( <ContentLoader 
+                        speed={2}
+                        width={1400}
+                        height={630}
+                        viewBox="0 0 1400 630"
+                        backgroundColor="#FFFFFF"
+                        foregroundColor="#F4F8FB"
+                    >
+                    <rect x="0" y="0" rx="10" ry="10" width="1400" height="630" />
+                  </ContentLoader>) : (
+                    <>
+                {renderItems()} </>
+                )}
             </div>
             )}
             {addStaff ? <Alert className='Alert' onClose={() => setAddStaff(false)} severity="success"><AlertTitle>Успешно</AlertTitle>Запись добавлена!</Alert> : null}
